@@ -6,9 +6,9 @@ cp cart.service /etc/systemd/system/cart.service
 useradd roboshop
 mkdir /app
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
-cd /app
+cd /app || exit
 unzip /tmp/cart.zip
-cd /app
+cd /app || exit
 npm install
 
 systemctl daemon-reload

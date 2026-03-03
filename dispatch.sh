@@ -3,9 +3,9 @@ cp dispatch.service /etc/systemd/system/dispatch.service
 useradd roboshop
 mkdir /app
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip
-cd /app
+cd /app || exit
 unzip /tmp/dispatch.zip
-cd /app
+cd /app || exit
 go mod init dispatch
 go get
 go build

@@ -3,9 +3,9 @@ cp shipping.service /etc/systemd/system/shipping.service
 useradd roboshop
 mkdir /app
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-cd /app
+cd /app || exit
 unzip /tmp/shipping.zip
-cd /app
+cd /app || exit
 mvn clean package
 mv target/shipping-1.0.jar shipping.jar
 

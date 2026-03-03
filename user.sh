@@ -6,9 +6,9 @@ cp user.service /etc/systemd/system/user.service
 useradd roboshop
 mkdir /app
 curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
-cd /app
+cd /app || exit
 unzip /tmp/user.zip
-cd /app
+cd /app || exit
 npm install
 
 systemctl daemon-reload
