@@ -1,15 +1,29 @@
-# 1. Setup Erlang and RabbitMQ Repos
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+# 1. Create the RabbitMQ Repo file
+cat <<EOF > /etc/yum.repos.d/rabbitmq.repo
+[modern-erlang]
+name=modern-erlang-el9
+baseurl=https://yum1.novemberain.com/erlang/el/9/\$basearch
+        https://yum2.novemberain.com/erlang/el/9/\$basearch
+        https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/9/\$basearch
+enabled=1
+gpgcheck=0
+
+[rabbitmq-el9]
+name=rabbitmq-el9
+baseurl=https://yum2.novemberain.com/rabbitmq/el/9/\$basearch
+        https://yum1.novemberain.com/rabbitmq/el/9/\$basearch
+        https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/rpm/el/9/\$basearch
+enabled=1
+gpgcheck=0
+EOF
 
 # 2. Install RabbitMQ
 dnf install rabbitmq-server -y
 
-# 3. Start and Enable the service
+# 3. Start and Enable
 systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
 
-# 4. Create the User (Replace roboshop123 with your actual password)
-# These are the lines 5 and 6 that failed earlier
+# 4. Create User
 rabbitmqctl add_user roboshop roboshop123
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
