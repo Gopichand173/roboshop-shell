@@ -1,13 +1,4 @@
-dnf install python3 gcc python3-devel -y
-cd payment.service /etc/systemd/system/payment.service || exit
-useradd roboshop
-rm -rf/app
-mkdir /app
-curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip
-cd /app || exit
-unzip /tmp/payment.zip
-cd /app || exit
-pip3 install -r requirements.txt
-systemctl daemon-reload
-systemctl enable payment
-systemctl start payment
+
+source common.sh
+component=payment
+PYTHON
