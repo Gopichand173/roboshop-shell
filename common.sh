@@ -30,3 +30,12 @@ PYTHON(){
 
   SYSTEMD
 }
+MAVEN()
+{
+  dnf install maven -y
+  APP_PREREQ
+  mvn clean package
+  mv target/${component}-1.0.jar ${component}.jar
+
+  SYSTEMD
+}
